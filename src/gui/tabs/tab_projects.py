@@ -45,12 +45,17 @@ class _ProjectRow(ctk.CTkFrame):
 
         self._load(project)
 
+    @staticmethod
+    def _set_entry(entry: ctk.CTkEntry, value: str) -> None:
+        entry.delete(0, "end")
+        if value:
+            entry.insert(0, value)
+
     def _load(self, project: Project):
-        _set = lambda e, v: (e.delete(0, "end"), e.insert(0, v) if v else None)
-        _set(self._name, project.name)
-        _set(self._desc, project.description)
-        _set(self._demo, project.demo_url)
-        _set(self._tech, ", ".join(project.tech))
+        self._set_entry(self._name, project.name)
+        self._set_entry(self._desc, project.description)
+        self._set_entry(self._demo, project.demo_url)
+        self._set_entry(self._tech, ", ".join(project.tech))
 
     def to_project(self) -> Project:
         return Project(

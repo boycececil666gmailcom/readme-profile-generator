@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-from typing import Any, Dict
+from typing import Any
 
 from src.core.schema import ProfileConfig
 
@@ -13,7 +13,7 @@ def _get_base_dir() -> str:
     return os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-def load_theme(theme_name: str) -> Dict[str, Any]:
+def load_theme(theme_name: str) -> dict[str, Any]:
     themes_dir = os.path.join(_get_base_dir(), "templates", "themes")
     path = os.path.join(themes_dir, f"{theme_name}.json")
     if not os.path.exists(path):

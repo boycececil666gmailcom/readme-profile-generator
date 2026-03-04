@@ -33,10 +33,15 @@ class _BackgroundRow(ctk.CTkFrame):
             command=lambda: self._on_remove(self),
         ).grid(row=0, column=6)
 
-        _set = lambda e, v: (e.delete(0, "end"), e.insert(0, v) if v else None)
-        _set(self._icon, entry.icon)
-        _set(self._label_e, entry.label)
-        _set(self._value, entry.value)
+        self._set_entry(self._icon, entry.icon)
+        self._set_entry(self._label_e, entry.label)
+        self._set_entry(self._value, entry.value)
+
+    @staticmethod
+    def _set_entry(entry: ctk.CTkEntry, value: str) -> None:
+        entry.delete(0, "end")
+        if value:
+            entry.insert(0, value)
 
     def to_entry(self) -> BackgroundEntry:
         return BackgroundEntry(

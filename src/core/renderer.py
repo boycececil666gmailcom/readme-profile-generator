@@ -16,6 +16,16 @@ def _get_sections_dir() -> str:
     return os.path.join(_get_base_dir(), "templates", "sections")
 
 
+# Each entry: (config field name, display label, badge URL template, link URL template).
+# {s} is replaced by the theme's badge style; {v} is replaced by the field value.
+_SOCIAL_DEFS = [
+    ("github",   "GitHub",   "https://img.shields.io/badge/GitHub-181717?style={s}&logo=github&logoColor=white",   "https://github.com/{v}"),
+    ("linkedin", "LinkedIn", "https://img.shields.io/badge/LinkedIn-0A66C2?style={s}&logo=linkedin&logoColor=white", "{v}"),
+    ("email",    "Email",    "https://img.shields.io/badge/Email-D14836?style={s}&logo=gmail&logoColor=white",      "mailto:{v}"),
+    ("twitter",  "Twitter",  "https://img.shields.io/badge/Twitter-1DA1F2?style={s}&logo=twitter&logoColor=white",  "{v}"),
+]
+
+
 def render_readme(config: ProfileConfig) -> str:
     theme = load_theme(config.theme)
     env = Environment(
@@ -27,34 +37,20 @@ def render_readme(config: ProfileConfig) -> str:
 
     style_social = theme.get("badge_style_social", "for-the-badge")
 
-    socials = []
-    if config.socials.github:
-        socials.append({
-            "label": "GitHub",
-            "badge_url": f"https://img.shields.io/badge/GitHub-181717?style={style_social}&logo=github&logoColor=white",
-            "url": f"https://github.com/{config.socials.github}",
-        })
-    if config.socials.linkedin:
-        socials.append({
-            "label": "LinkedIn",
-            "badge_url": f"https://img.shields.io/badge/LinkedIn-0A66C2?style={style_social}&logo=linkedin&logoColor=white",
-            "url": config.socials.linkedin,
-        })
-    if config.socials.email:
-        socials.append({
-            "label": "Email",
-            "badge_url": f"https://img.shields.io/badge/Email-D14836?style={style_social}&logo=gmail&logoColor=white",
-            "url": f"mailto:{config.socials.email}",
-        })
-    if config.socials.twitter:
-        socials.append({
-            "label": "Twitter",
-            "badge_url": f"https://img.shields.io/badge/Twitter-1DA1F2?style={style_social}&logo=twitter&logoColor=white",
-            "url": config.socials.twitter,
-        })
+    # Build social badge list from any populated fields.
+    socials = [
+        {
+            "label": label,
+            "badge_url": badge_tmpl.format(s=style_social, v=value),
+            "url": url_tmpl.format(v=value),
+        }
+        for field, label, badge_tmpl, url_tmpl in _SOCIAL_DEFS
+        if (value := getattr(config.socials, field, ""))
+    ]
 
     taglines_encoded = ";".join(quote_plus(t) for t in config.taglines)
 
+    # Shorthand keys let templates stay concise (e.g. `tier1` instead of `config.skills.tier1`).
     ctx = {
         "config": config,
         "theme": theme,
@@ -73,11 +69,10 @@ def render_readme(config: ProfileConfig) -> str:
 
     parts = []
     for section in config.sections:
-        tmpl_name = f"{section}.md.j2"
         try:
-            tmpl = env.get_template(tmpl_name)
-            parts.append(tmpl.render(**ctx))
+            parts.append(env.get_template(f"{section}.md.j2").render(**ctx))
         except Exception:
+            # Skip sections whose template cannot be found or rendered.
             pass
 
     return "\n".join(parts)
