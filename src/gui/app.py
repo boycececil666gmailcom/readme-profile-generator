@@ -20,7 +20,7 @@ class App(ctk.CTk):
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")
 
-        self.title("ProfileForge")
+        self.title("SuperAmazingReadmeForge")
         self.geometry("960x720")
         self.minsize(700, 520)
 
