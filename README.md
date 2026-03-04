@@ -1,5 +1,10 @@
 # README Profile Generator
 
+> **🆓 Freeware — free to use, forever.**
+> This tool was built as a genuine contribution to the developer community. A polished GitHub profile
+> helps everyone stand out — and yes, building something useful for others is also the best kind of self-promotion.
+> Use it, share it, and make your profile shine.
+
 A desktop app (Python + CustomTkinter) to visually build and export a GitHub profile `README.md`.
 Fill in your details, preview in your browser, then export — no Markdown knowledge required.
 
