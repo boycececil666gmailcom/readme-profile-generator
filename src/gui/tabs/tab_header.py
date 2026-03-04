@@ -40,8 +40,8 @@ class HeaderTab(ctk.CTkFrame):
         scroll.pack(fill="both", expand=True)
         scroll.columnconfigure(1, weight=1)
 
-        self._name = self._labeled_entry(scroll, "Display Name", 0, "e.g. TyrionBao")
-        self._username = self._labeled_entry(scroll, "GitHub Username", 1, "e.g. boycececil666gmailcom")
+        self._name = self._labeled_entry(scroll, "Display Name", 0, "e.g. Jane Dev")
+        self._username = self._labeled_entry(scroll, "GitHub Username", 1, "e.g. janedev")
         self._github = self._labeled_entry(scroll, "GitHub Profile URL", 2, "https://github.com/...")
         self._linkedin = self._labeled_entry(scroll, "LinkedIn URL", 3, "https://linkedin.com/in/...")
         self._email = self._labeled_entry(scroll, "Email", 4, "user@example.com")

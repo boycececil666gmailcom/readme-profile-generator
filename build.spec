@@ -7,6 +7,7 @@ a = Analysis(
     datas=[
         ('templates', 'templates'),
         ('default.config.json', '.'),
+        ('assets', 'assets'),
     ],
     hiddenimports=['customtkinter'],
     hookspath=[],
@@ -24,7 +25,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='readme-profile-generator',
+    name='profileforge',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -36,5 +37,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=None,
+    icon='assets/icon.ico',
 )

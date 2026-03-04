@@ -2,7 +2,9 @@ from tkinter import filedialog, messagebox
 
 import customtkinter as ctk
 
-from src.core.config_io import get_available_themes, get_default_config_path, load_config, save_config
+import os
+
+from src.core.config_io import get_available_themes, get_base_dir, get_default_config_path, load_config, save_config
 from src.core.renderer import preview_in_browser, render_readme
 from src.core.schema import ProfileConfig
 from src.gui.tabs.tab_background import BackgroundTab
@@ -18,9 +20,13 @@ class App(ctk.CTk):
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")
 
-        self.title("README Profile Generator")
+        self.title("ProfileForge")
         self.geometry("960x720")
         self.minsize(700, 520)
+
+        icon_path = os.path.join(get_base_dir(), "assets", "icon.ico")
+        if os.path.exists(icon_path):
+            self.iconbitmap(icon_path)
 
         self._config = ProfileConfig()
         self._build_ui()

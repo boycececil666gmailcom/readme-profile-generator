@@ -13,6 +13,11 @@ def _get_base_dir() -> str:
     return os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
+def get_base_dir() -> str:
+    """Public alias for _get_base_dir — use this outside core."""
+    return _get_base_dir()
+
+
 def load_theme(theme_name: str) -> dict[str, Any]:
     themes_dir = os.path.join(_get_base_dir(), "templates", "themes")
     path = os.path.join(themes_dir, f"{theme_name}.json")

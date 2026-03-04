@@ -1,4 +1,4 @@
-# README Profile Generator
+# ProfileForge
 
 > **🆓 Freeware — free to use, forever.**
 > This tool was built as a genuine contribution to the developer community. A polished GitHub profile
@@ -7,6 +7,8 @@
 
 A desktop app (Python + CustomTkinter) to visually build and export a GitHub profile `README.md`.
 Fill in your details, preview in your browser, then export — no Markdown knowledge required.
+
+![ProfileForge icon](assets/icon.ico)
 
 ## Features
 
@@ -29,7 +31,7 @@ python main.py
 ```bash
 pip install pyinstaller
 pyinstaller build.spec
-# output: dist/readme-profile-generator.exe
+# output: dist/profileforge.exe
 ```
 
 > The `build.spec` bundles the `templates/` folder automatically.
