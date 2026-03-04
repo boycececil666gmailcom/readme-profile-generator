@@ -76,6 +76,12 @@ Edit `src/core/badge_map.py` and add an entry:
 "My Tool": "https://img.shields.io/badge/MyTool-COLOR?style=flat-square&logo=...",
 ```
 
+## Showcase
+
+Here's a real GitHub profile README generated with this tool:
+
+👉 **[github.com/boycececil666gmailcom](https://github.com/boycececil666gmailcom)**
+
 ## License
 
 MIT
