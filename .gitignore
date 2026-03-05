@@ -3,9 +3,11 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+test/
 *.spec
 *.exe
 .env
 venv/
 .venv/
+.venv-*/
 *.tmp.html
